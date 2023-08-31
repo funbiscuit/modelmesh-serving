@@ -17,29 +17,7 @@ spec:
     singular: inferenceservice
   scope: Namespaced
   versions:
-    - additionalPrinterColumns:
-        - jsonPath: .status.url
-          name: URL
-          type: string
-        - jsonPath: .status.conditions[?(@.type=='Ready')].status
-          name: Ready
-          type: string
-        - jsonPath: .status.components.predictor.traffic[?(@.tag=='prev')].percent
-          name: Prev
-          type: integer
-        - jsonPath: .status.components.predictor.traffic[?(@.latestRevision==true)].percent
-          name: Latest
-          type: integer
-        - jsonPath: .status.components.predictor.traffic[?(@.tag=='prev')].revisionName
-          name: PrevRolledoutRevision
-          type: string
-        - jsonPath: .status.components.predictor.traffic[?(@.latestRevision==true)].revisionName
-          name: LatestReadyRevision
-          type: string
-        - jsonPath: .metadata.creationTimestamp
-          name: Age
-          type: date
-      name: v1beta1
+    - name: v1beta1
       schema:
         openAPIV3Schema:
           properties:
@@ -63,52 +41,6 @@ spec:
                 annotations:
                   additionalProperties:
                     type: string
-                  type: object
-                components:
-                  additionalProperties:
-                    properties:
-                      address:
-                        properties:
-                          CACerts:
-                            type: string
-                          name:
-                            type: string
-                          url:
-                            type: string
-                        type: object
-                      grpcUrl:
-                        type: string
-                      latestCreatedRevision:
-                        type: string
-                      latestReadyRevision:
-                        type: string
-                      latestRolledoutRevision:
-                        type: string
-                      previousRolledoutRevision:
-                        type: string
-                      restUrl:
-                        type: string
-                      traffic:
-                        items:
-                          properties:
-                            configurationName:
-                              type: string
-                            latestRevision:
-                              type: boolean
-                            percent:
-                              format: int64
-                              type: integer
-                            revisionName:
-                              type: string
-                            tag:
-                              type: string
-                            url:
-                              type: string
-                          type: object
-                        type: array
-                      url:
-                        type: string
-                    type: object
                   type: object
                 conditions:
                   items:
@@ -209,7 +141,6 @@ spec:
                 url:
                   type: string
               type: object
-              x-kubernetes-preserve-unknown-fields: true
           type: object
       served: true
       storage: true
